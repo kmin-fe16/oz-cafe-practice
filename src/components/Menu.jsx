@@ -2,9 +2,16 @@ import { useState } from "react";
 import Item from "./Item";
 import OrderModal from "./OrderModal";
 
-function Menu({ menu, cart, setCart }) {
+import { useMenu } from "../context/menuContext";
+import { useCart } from "../context/cartContext";
+
+function Menu() {
   const [modalOn, setModalOn] = useState(false);
   const [modalMenu, setModalMenu] = useState(null);
+
+  const { menu } = useMenu();
+  const { cart, setCart } = useCart();
+
   if (!menu)
     return (
       <div style={{ textAlign: "center", margin: "80px" }}>
@@ -13,6 +20,7 @@ function Menu({ menu, cart, setCart }) {
     );
 
   const categorys = Object.keys(menu);
+
   return (
     <>
       {categorys.map((category) => {
