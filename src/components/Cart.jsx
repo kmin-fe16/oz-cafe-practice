@@ -1,4 +1,6 @@
 import data from "../assets/data";
+import { useMenu } from "../context/menuContext";
+import { useCart } from "../context/cartContext";
 
 function Cart() {
   const { menu, options } = useMenu();

@@ -1,21 +1,17 @@
-import "./App.scss";
-import Header from "./components/Header";
-import Menu from "./components/Menu";
-import { Route, Routes } from "react-router-dom";
-import Cart from "./components/Cart";
+import { createContext, useContext, useState } from "react";
 
-function App() {
+const CartContext = createContext();
+
+export function CartProvider({ children }) {
+  const [cart, setCart] = useState([]);
+
   return (
-    <div>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Menu />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </main>
-    </div>
+    <CartContext.Provider value={{ cart, setCart }}>
+      {children}
+    </CartContext.Provider>
   );
 }
 
-export default App;
+export function useCart() {
+  return useContext(CartContext);
+}
